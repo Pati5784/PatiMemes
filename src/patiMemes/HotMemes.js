@@ -5,12 +5,17 @@ export function HotMemes(props) {
   return (
     <div>
       <Typography variant="h4" gutterBottom component="div">
-        Hot memes
+        Hot
       </Typography>
       {props.memes
         .filter((item) => item.upvotes - item.downvotes > 5)
         .map((item) => (
-          <Meme {...item} upvote={props.upvote} downvote={props.downvote} />
+          <Meme
+            {...item}
+            upvote={props.upvote}
+            downvote={props.downvote}
+            key={item.title}
+          />
         ))}
     </div>
   );

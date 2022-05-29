@@ -40,8 +40,8 @@ function App() {
 					md={2}
 					lg={1}
 					sx={{
-						backgroundColor: 'white',
-						padding: '12px 0',
+						backgroundColor: 'lightgrey',
+						padding: '12px 0'
 					}}
 				>
 					<Link
@@ -69,7 +69,8 @@ function App() {
 					lg={11}
 					container
 					sx={{
-						backgroundColor: 'lightgrey',
+						backgroundColor: 'white',
+						borderLeft: '12px dashed lightgrey'
 					}}
 				>
 					<Grid item xs={0} md={2} lg={3} />
