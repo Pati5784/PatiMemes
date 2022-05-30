@@ -2,13 +2,18 @@
 import './App.css';
 import { Routes, Route, Link } from 'react-router-dom';
 import { Button, Grid } from '@mui/material';
-import { patiMemes } from './patiMemes/patiMemes.js';
-import { HotMemes } from './patiMemes/HotMemes';
-import { RegularMemes } from './patiMemes/RegularMemes';
 import { useEffect, useState } from 'react';
+import { patiMemes } from './patiMemes/patiMemes';
+import { Memes } from './patiMemes/Memes';
 
 function App() {
 	const [memes, setMemes] = useState([]);
+
+	const regularMemes = memes.filter(
+		(item) => item.upvotes - item.downvotes <= 5
+	);
+	const hotMemes = memes.filter((item) => item.upvotes - item.downvotes > 5);
+
 	const upvote = (memeTitle) => {
 		setMemes((memes) =>
 			memes.map((meme) => ({
@@ -41,7 +46,7 @@ function App() {
 					lg={1}
 					sx={{
 						backgroundColor: 'lightgrey',
-						padding: '12px 0'
+						padding: '12px 0',
 					}}
 				>
 					<Link
@@ -70,7 +75,7 @@ function App() {
 					container
 					sx={{
 						backgroundColor: 'white',
-						borderLeft: '12px dashed lightgrey'
+						borderLeft: '12px dashed lightgrey',
 					}}
 				>
 					<Grid item xs={0} md={2} lg={3} />
@@ -79,17 +84,23 @@ function App() {
 							<Route
 								path='/regular'
 								element={
-									<RegularMemes
-										memes={memes}
+									<Memes
+										memes={regularMemes}
 										upvote={upvote}
 										downvote={downvote}
+										title='Regular'
 									/>
 								}
 							/>
 							<Route
 								path='/hot'
 								element={
-									<HotMemes memes={memes} upvote={upvote} downvote={downvote} />
+									<Memes
+										memes={hotMemes}
+										upvote={upvote}
+										downvote={downvote}
+										title='Hot'
+									/>
 								}
 							/>
 						</Routes>
